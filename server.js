@@ -194,12 +194,15 @@ wss.allowbroadcast = function(reqstudentname,reqstudent,roomnumber,clientnumber)
           clients[roomnumber][clientnumber].send(JSON.stringify( {"request": 'allowed'})) ; //send allow message to the client who requested
           clients[roomnumber][i].send (JSON.stringify({ 'displayName': reqstudentname, 'uuid': 'reqstudent','roomID' : 'joined',' roomjoined':room[roomnumber], 'request':'allowed', 'reqstudent': reqstudent, "reqstudentname": reqstudentname  }));
           console.log('allowrbroadcast sent');
-        } else{
-          clients[roomnumber][clientnumber].send(JSON.stringify( {"request": 'allowed'})) ; //send allow message to the client who requested
-          
-        // console.log('allowrbroadcast sent');  
-        // clients[roomnumber][i].send (JSON.stringify({ 'displayName': reqstudentname, 'uuid': 'reqstudent','roomID' : 'joined',' roomjoined':room[roomnumber], 'request':'allow', 'reqstudent': reqstudent, "reqstudentname": reqstudentname  }));
-         //send data to all clients in room
+        } 
+        if(i == 0){ 
+          clients[roomnumber][clientnumber].send(JSON.stringify( {"request": 'allowedbymaster'})) ; //send allow message to the client who requested
+          console.log('allowrbroadcast sent to master');
+        }
+        else{  
+          console.log('allowrbroadcast sent to all');
+          clients[roomnumber][i].send(JSON.stringify( {"request": 'allowed'})) ; //send allow message to the client who requested
+        
           }  } }
 
   
