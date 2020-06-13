@@ -98,6 +98,7 @@ if (signal.master){
 }
 if(signal.request == 'allowed'){
 requestAllowed.push(signal.request)
+console.log("allowed pushed")
 }
 //-------- message received from wss.doubtbroadcast
   if(signal.request == 'doubt'){ 
@@ -162,6 +163,34 @@ requestAllowed.push(signal.request)
            console.log('deleted from array',signal.reqstudentname, signal.reqstudent, localRoom);  
           }
 
+          if(signal.request == 'allowedbymaster'){
+            document.querySelector('#text').innerHTML = 'doubt allowed'; //display next doubt     
+          }
+if(requestAllowed.length !=0){
+  document.querySelector('#text').innerHTML = 'doubt allowed by teacher';
+  console.log("doubt allowed", requestAllowed)
+  //------------------------- for setting up connection
+if (peerUuid == localUuid || (signal.dest != localUuid && signal.dest != 'all')) 
+return; // Ignore messages that are not for us or from ourselves
+if (signal.displayName && signal.dest == 'all') {  
+  console.log("signal dest all")
+  setUpPeer(peerUuid, signal.displayName); // set up peer connection object for a newcomer peer
+  serverConnection.send(JSON.stringify({ 'displayName': localDisplayName, 'uuid': localUuid, 'dest': peerUuid, 'roomID' : localRoom  }));
+
+} else if (signal.displayName && signal.dest == localUuid) {   
+  setUpPeer(peerUuid, signal.displayName, true);// initiate call if we are the newcomer peer
+
+} else if (signal.sdp) {
+  peerConnections[peerUuid].pc.setRemoteDescription(new RTCSessionDescription(signal.sdp)).then(function () {  
+    if (signal.sdp.type == 'offer') {  // Only create answers in response to offers
+      peerConnections[peerUuid].pc.createAnswer().then(description => createdDescription(description, peerUuid)).catch(errorHandler);
+    } 
+  }).catch(errorHandler);
+} else if (signal.ice) {
+  peerConnections[peerUuid].pc.addIceCandidate(new RTCIceCandidate(signal.ice)).catch(errorHandler);
+}
+
+} //if req allowed
 
 //------------------------- for setting up connection
 if (peerUuid == localUuid || (signal.dest != localUuid && signal.dest != 'all')) 
