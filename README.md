@@ -1,4 +1,5 @@
-# PeerStream-2
+# Room feature with WebRTC Broadcast
+
 This code uses nodeJS, ws and express
 
 To start : 
