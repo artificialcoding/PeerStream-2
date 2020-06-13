@@ -1,10 +1,10 @@
 {
-  "name": "WebRTC-Example",
+  "name": "PeerStream-2",
   "version": "1.0.0",
-  "description": "An 'as simple as it gets' WebRTC example.",
+  "description": "Room feature",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,8 +14,8 @@
   "keywords": [
     "webrtc"
   ],
-  "author": "shane tully",
-  "license": "MIT",
+  "author": "Aradhita sharma",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/shanet/WebRTC-Example/issues"
   },
