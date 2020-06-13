@@ -11,11 +11,11 @@ To run on browser:
 ```
 https://localhost:8443
 ```
-1. On the first page, click on create button to request for a room name
+- On the first page, click on create button to request for a room name
 once room is alloted, share that room with users, and click on join button
 enter your name and room name in the prompted box
-  -teacher will be displayed request button as : allow request
-  -students will be displayed request button as  : request doubt 
+  - teacher will be displayed request button as : allow request
+  - students will be displayed request button as  : request doubt 
 
 2. on pressing request doubt, details of student is sent to teacher, and stored in queue
   -if teacher cancels, next request in the queue will be mentioned to him
